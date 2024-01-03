@@ -25,5 +25,14 @@ public class AddressBook {
         return contacts;
     }
 
+    public void editContact(String oldName, Contact newContact) {
+        for (int i = 0; i < contacts.size(); i++) {
+            if (contacts.get(i).getFirstName().equals(oldName)) {
+                contacts.set(i, newContact);
+                break;
+            }
+        }
+    }
+
    
 }
