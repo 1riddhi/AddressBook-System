@@ -119,4 +119,25 @@ public class AddressBook {
                 .collect(Collectors.toList());
     }
 
+    public List<Contact> sortEntriesByCity(String bookName) {
+        List<Contact> contacts = bookList.getOrDefault(bookName, new ArrayList<>());
+        return contacts.stream()
+                .sorted(Comparator.comparing(Contact::getCity))
+                .collect(Collectors.toList());
+    }
+
+    public List<Contact> sortEntriesByState(String bookName) {
+        List<Contact> contacts = bookList.getOrDefault(bookName, new ArrayList<>());
+        return contacts.stream()
+                .sorted(Comparator.comparing(Contact::getState))
+                .collect(Collectors.toList());
+    }
+
+    public List<Contact> sortEntriesByZip(String bookName) {
+        List<Contact> contacts = bookList.getOrDefault(bookName, new ArrayList<>());
+        return contacts.stream()
+                .sorted(Comparator.comparing(Contact::getZip))
+                .collect(Collectors.toList());
+    }
+
 }
