@@ -1,6 +1,9 @@
 package com.example;
 import java.util.Scanner;
 
+import main.java.com.example.AddressBook;
+import main.java.com.example.Contact;
+
 public class Main {
     public static void main(String[] args) {
         
@@ -13,7 +16,8 @@ public class Main {
             System.out.println("2. Edit Contact");
             System.out.println("3. Delete Contact");
             System.out.println("4. Display Address Book");
-            System.out.println("5. Exit");
+            System.out.println("5. Add Multiple Contacts");
+            System.out.println("6. Exit");
 
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
@@ -50,6 +54,22 @@ public class Main {
                     break;
 
                 case 5:
+                    // Add Multiple Contacts
+                    System.out.print("Enter the number of contacts to add: ");
+                    int numberOfContacts = scanner.nextInt();
+                    scanner.nextLine();
+
+                    for (int i = 0; i < numberOfContacts; i++) {
+                        System.out.println("\nAdding Contact #" + (i + 1));
+                        Contact multipleContact = createContactFromConsole();
+                        addressBook.addContact(multipleContact);
+                    }
+
+                    System.out.println("Multiple contacts added successfully!");
+                    break;
+
+
+                case 6:
                     // Exit
                     System.out.println("Exit !!!");
                     System.exit(0);
