@@ -2,12 +2,15 @@ package com.example;
 import java.util.List;
 import java.util.Scanner;
 
+
 import main.java.com.example.AddressBook;
 import main.java.com.example.Contact;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args)  throws IOException{
         AddressBook addressBook = new AddressBook(); 
+        String fileName="AddressBook_Data.txt";
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -19,7 +22,8 @@ public class Main {
             System.out.println("5. Add Multiple Contacts");
             System.out.println("6. Search by City");
             System.out.println("7. Search by State");
-            System.out.println("8. Exit");
+            System.out.println("8. Read File Data");
+            System.out.println("9. Exit");
 
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
@@ -31,7 +35,10 @@ public class Main {
                     System.out.print("Enter the name of the Address Book: ");
                     String addBookName = scanner.nextLine();
                     Contact newContact = createContactFromConsole();
+                    
                     addressBook.addContact(addBookName, newContact);
+                    addressBook.writeToFile(fileName);
+                    
                     break;
 
                 case 2:
@@ -43,6 +50,9 @@ public class Main {
                     Contact editedContact = createContactFromConsole();
                     addressBook.editContact(editBookName, editName, editedContact);
                     System.out.println("Contact edited successfully!");
+                    
+                    addressBook.writeToFile(fileName);
+                    
                     break;
 
                 case 3:
@@ -53,6 +63,9 @@ public class Main {
                     String deleteName = scanner.nextLine();
                     addressBook.deleteContact(deleteBookName, deleteName);
                     System.out.println("Contact deleted successfully!");
+                    
+                    addressBook.writeToFile(fileName);
+                    
                     break;
 
                 case 4:
@@ -99,8 +112,12 @@ public class Main {
                     List<Contact> stateSearchResult = addressBook.searchByState(bookName, stateToSearch);
                     displaySearchResult(stateSearchResult);
                     break;
-
+                    
                 case 8:
+                    addressBook.readFile(fileName);
+                    break;
+
+                case 9:
                     // Exit
                     System.out.println("Exit !!!");
                     System.exit(0);
@@ -109,6 +126,8 @@ public class Main {
                     System.out.println("Invalid choice. Please enter a valid option.");
                     break;
             }
+
+            scanner.close();
         }
     }
 

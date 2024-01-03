@@ -8,6 +8,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Comparator;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.*;
+
 public class AddressBook {
     // private List<Contact> contacts;
     private Map<String, List<Contact>> bookList;
@@ -138,6 +143,37 @@ public class AddressBook {
         return contacts.stream()
                 .sorted(Comparator.comparing(Contact::getZip))
                 .collect(Collectors.toList());
+    }
+    
+    public void writeToFile(String fileName) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            
+            
+            System.out.println("|-----------------Write from file------------|");
+            
+            
+            for (Map.Entry<String, List<Contact>> entry : bookList.entrySet()) {
+                writer.write(entry.getKey() + ": " + entry.getValue());
+                writer.newLine();
+            }
+
+            System.out.println("Address book written to file: " + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void readFile(String fileName) throws IOException {
+       
+        System.out.println("|-----------------Read from file------------|");
+        Path filePath = Paths.get(fileName);
+        
+        if (Files.exists(filePath)) {
+            
+            String fileContent = Files.readString(filePath);
+            System.out.println("File Content:\n" + fileContent);
+        } else {
+            System.out.println("File does not exist: " + fileName);
+        }
     }
 
 }
