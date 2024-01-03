@@ -6,8 +6,7 @@ import main.java.com.example.Contact;
 
 public class Main {
     public static void main(String[] args) {
-        
-        AddressBook addressBook = new AddressBook();
+        AddressBook addressBook = new AddressBook(); 
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -21,53 +20,62 @@ public class Main {
 
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();
-
+            scanner.nextLine(); 
             switch (choice) {
                 case 1:
                     // Add Contact
+                    System.out.print("Enter the name of the Address Book: ");
+                    String addBookName = scanner.nextLine();
                     Contact newContact = createContactFromConsole();
-                    addressBook.addContact(newContact);
+                    addressBook.addContact(addBookName, newContact);
+                    System.out.println("Contact added successfully!");
                     break;
 
                 case 2:
                     // Edit Contact
+                    System.out.print("Enter the name of the Address Book: ");
+                    String editBookName = scanner.nextLine();
                     System.out.print("Enter the first name of the contact to edit: ");
                     String editName = scanner.nextLine();
                     Contact editedContact = createContactFromConsole();
-                    addressBook.editContact(editName, editedContact);
+                    addressBook.editContact(editBookName, editName, editedContact);
                     System.out.println("Contact edited successfully!");
                     break;
 
                 case 3:
                     // Delete Contact
+                    System.out.print("Enter the name of the Address Book: ");
+                    String deleteBookName = scanner.nextLine();
                     System.out.print("Enter the first name of the contact to delete: ");
                     String deleteName = scanner.nextLine();
-                    addressBook.deleteContact(deleteName);
+                    addressBook.deleteContact(deleteBookName, deleteName);
                     System.out.println("Contact deleted successfully!");
                     break;
 
                 case 4:
                     // Display Address Book
+                    System.out.print("Enter the name of the Address Book: ");
+                    String displayBookName = scanner.nextLine();
                     System.out.println("\nCurrent Address Book:");
-                    addressBook.getContacts().forEach(System.out::println);
+                    addressBook.getContacts(displayBookName).forEach(System.out::println);
                     break;
 
                 case 5:
                     // Add Multiple Contacts
+                    System.out.print("Enter the name of the Address Book: ");
+                    String addMultipleBookName = scanner.nextLine();
                     System.out.print("Enter the number of contacts to add: ");
                     int numberOfContacts = scanner.nextInt();
-                    scanner.nextLine();
+                    scanner.nextLine(); // Consume the newline character
 
                     for (int i = 0; i < numberOfContacts; i++) {
                         System.out.println("\nAdding Contact #" + (i + 1));
                         Contact multipleContact = createContactFromConsole();
-                        addressBook.addContact(multipleContact);
+                        addressBook.addContact(addMultipleBookName, multipleContact);
                     }
 
                     System.out.println("Multiple contacts added successfully!");
                     break;
-
 
                 case 6:
                     // Exit
