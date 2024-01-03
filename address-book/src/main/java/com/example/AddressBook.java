@@ -9,17 +9,21 @@ import java.util.stream.Collectors;
 public class AddressBook {
     // private List<Contact> contacts;
     private Map<String, List<Contact>> bookList;
+    private Map<String, List<Contact>> cityToPerson;
+    private Map<String, List<Contact>> stateToPerson;
 
     public AddressBook() {
         this.bookList = new HashMap<>();
+        this.cityToPerson = new HashMap<>();
+        this.stateToPerson = new HashMap<>();
     }
 
     public void addContact(String bookName, Contact contact) {
         if (bookList.containsKey(bookName)) {
             List<Contact> contacts = bookList.get(bookName);
-
             if (!isDuplicateName(contacts, contact.getFirstName(), contact.getLastName())) {
                 contacts.add(contact);
+                updateCityAndStateMaps(contact);
                 System.out.println("Contact added successfully!");
             } else {
                 System.out.println("Duplicate entry. Contact not added.");
@@ -28,9 +32,17 @@ public class AddressBook {
             List<Contact> contacts = new ArrayList<>();
             contacts.add(contact);
             bookList.put(bookName, contacts);
-            System.out.println("Contact added successfully!");
-
+            updateCityAndStateMaps(contact);
         }
+    }
+
+    private void updateCityAndStateMaps(Contact contact) {
+
+        String city = contact.getCity();
+        cityToPerson.computeIfAbsent(city, k -> new ArrayList<>()).add(contact);
+
+        String state = contact.getState();
+        stateToPerson.computeIfAbsent(state, k -> new ArrayList<>()).add(contact);
     }
 
     public List<Contact> getContacts(String bookName) {
@@ -80,6 +92,6 @@ public class AddressBook {
         return bookList.getOrDefault(bookName, List.of()).stream()
                 .filter(contact -> contact.getState().equalsIgnoreCase(state))
                 .collect(Collectors.toList());
-    
+
     }
 }
