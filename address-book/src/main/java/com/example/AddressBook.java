@@ -34,5 +34,14 @@ public class AddressBook {
         }
     }
 
+    public void deleteContact(String name) {
+        for (Contact contact : contacts) {
+            if (contact.getFirstName().equals(name)) {
+                contacts.remove(contact);
+                break;
+            }
+        }
+    }    
+
    
 }
