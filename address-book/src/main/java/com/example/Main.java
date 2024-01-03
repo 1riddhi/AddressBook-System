@@ -22,13 +22,13 @@ public class Main {
             int choice = scanner.nextInt();
             scanner.nextLine(); 
             switch (choice) {
+              
                 case 1:
                     // Add Contact
                     System.out.print("Enter the name of the Address Book: ");
                     String addBookName = scanner.nextLine();
                     Contact newContact = createContactFromConsole();
                     addressBook.addContact(addBookName, newContact);
-                    System.out.println("Contact added successfully!");
                     break;
 
                 case 2:
