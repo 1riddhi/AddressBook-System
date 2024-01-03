@@ -1,6 +1,7 @@
 package main.java.com.example;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -94,4 +95,13 @@ public class AddressBook {
                 .collect(Collectors.toList());
 
     }
+
+    public List<Contact> viewPersonsByCity(String city) {
+        return cityToPerson.getOrDefault(city.toLowerCase(), Collections.emptyList());
+    }
+
+    public List<Contact> viewPersonsByState(String state) {
+        return stateToPerson.getOrDefault(state.toLowerCase(), Collections.emptyList());
+    }
+
 }
