@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Comparator;
 
 public class AddressBook {
     // private List<Contact> contacts;
@@ -110,6 +111,12 @@ public class AddressBook {
 
     public long countPersonsByState(String state) {
         return stateToPerson.getOrDefault(state, Collections.emptyList()).stream().count();
+    }
+
+    public List<Contact> sortEntriesByName(String bookName) {
+        return bookList.getOrDefault(bookName, Collections.emptyList()).stream()
+                .sorted(Comparator.comparing(Contact::getFirstName))
+                .collect(Collectors.toList());
     }
 
 }
