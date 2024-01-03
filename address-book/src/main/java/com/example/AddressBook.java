@@ -104,4 +104,12 @@ public class AddressBook {
         return stateToPerson.getOrDefault(state, Collections.emptyList());
     }
 
+    public long countPersonsByCity(String city) {
+        return cityToPerson.getOrDefault(city, Collections.emptyList()).stream().count();
+    }
+
+    public long countPersonsByState(String state) {
+        return stateToPerson.getOrDefault(state, Collections.emptyList()).stream().count();
+    }
+
 }
