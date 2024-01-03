@@ -97,11 +97,11 @@ public class AddressBook {
     }
 
     public List<Contact> viewPersonsByCity(String city) {
-        return cityToPerson.getOrDefault(city.toLowerCase(), Collections.emptyList());
+        return cityToPerson.getOrDefault(city, Collections.emptyList());
     }
 
     public List<Contact> viewPersonsByState(String state) {
-        return stateToPerson.getOrDefault(state.toLowerCase(), Collections.emptyList());
+        return stateToPerson.getOrDefault(state, Collections.emptyList());
     }
 
 }
