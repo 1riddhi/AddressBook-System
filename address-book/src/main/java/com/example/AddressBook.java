@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AddressBook {
     // private List<Contact> contacts;
-    private Map<String, List<Contact>> bookList = new HashMap<>();
+    private Map<String, List<Contact>> bookList;
 
     public AddressBook() {
-        this.contacts = new ArrayList<>();
+        this.bookList = new HashMap<>();
     }
 
     public void addContact(String bookName, Contact contact) {
@@ -67,5 +68,18 @@ public class AddressBook {
             }
         }
         return false;
+    }
+
+    public List<Contact> searchByCity(String bookName, String city) {
+        return bookList.getOrDefault(bookName, List.of()).stream()
+                .filter(contact -> contact.getCity().equalsIgnoreCase(city))
+                .collect(Collectors.toList());
+    }
+
+    public List<Contact> searchByState(String bookName, String state) {
+        return bookList.getOrDefault(bookName, List.of()).stream()
+                .filter(contact -> contact.getState().equalsIgnoreCase(state))
+                .collect(Collectors.toList());
+    
     }
 }

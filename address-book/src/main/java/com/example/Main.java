@@ -1,4 +1,5 @@
 package com.example;
+import java.util.List;
 import java.util.Scanner;
 
 import main.java.com.example.AddressBook;
@@ -16,7 +17,9 @@ public class Main {
             System.out.println("3. Delete Contact");
             System.out.println("4. Display Address Book");
             System.out.println("5. Add Multiple Contacts");
-            System.out.println("6. Exit");
+            System.out.println("6. Search by City");
+            System.out.println("7. Search by State");
+            System.out.println("8. Exit");
 
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
@@ -78,6 +81,26 @@ public class Main {
                     break;
 
                 case 6:
+                    // Search by City
+                    System.out.print("Enter the name of the Address Book: ");
+                    String bookName = scanner.nextLine();
+                    System.out.print("Enter the city to search: ");
+                    String cityToSearch = scanner.nextLine();
+                    List<Contact> citySearchResult = addressBook.searchByCity(bookName, cityToSearch);
+                    displaySearchResult(citySearchResult);
+                    break;
+
+                case 7:
+                    // Search by State
+                    System.out.print("Enter the name of the Address Book: ");
+                    bookName = scanner.nextLine();
+                    System.out.print("Enter the state to search: ");
+                    String stateToSearch = scanner.nextLine();
+                    List<Contact> stateSearchResult = addressBook.searchByState(bookName, stateToSearch);
+                    displaySearchResult(stateSearchResult);
+                    break;
+
+                case 8:
                     // Exit
                     System.out.println("Exit !!!");
                     System.exit(0);
@@ -118,5 +141,14 @@ public class Main {
         contact.setEmail(scanner.nextLine());
 
         return contact;
+    }
+
+    private static void displaySearchResult(List<Contact> result) {
+        if (result.isEmpty()) {
+            System.out.println("No matching contacts found.");
+        } else {
+            System.out.println("\nSearch Result:");
+            result.forEach(System.out::println);
+        }
     }
 }
