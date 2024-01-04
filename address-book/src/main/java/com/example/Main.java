@@ -3,8 +3,6 @@ import java.util.List;
 import java.util.Scanner;
 
 
-import main.java.com.example.AddressBook;
-import main.java.com.example.Contact;
 import java.io.IOException;
 
 public class Main {
@@ -15,7 +13,7 @@ public class Main {
 
         while (true) {
             System.out.println("\nOptions:");
-            System.out.println("1. Add Contact");
+            System.out.println("1. Add Contact and write in file");
             System.out.println("2. Edit Contact");
             System.out.println("3. Delete Contact");
             System.out.println("4. Display Address Book");
@@ -23,7 +21,8 @@ public class Main {
             System.out.println("6. Search by City");
             System.out.println("7. Search by State");
             System.out.println("8. Read File Data");
-            System.out.println("9. Exit");
+            System.out.println("9. Sort by Name");
+            System.out.println("10. Exit");
 
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
@@ -118,6 +117,13 @@ public class Main {
                     break;
 
                 case 9:
+                    System.out.println("Enter name of AddressBook");
+                    addBookName=scanner.nextLine();
+                    List<Contact> contacts=addressBook.sortEntriesByName(addBookName);
+                    contacts.forEach(System.out::println);
+                    break;
+
+                case 10:
                     // Exit
                     System.out.println("Exit !!!");
                     System.exit(0);
@@ -127,7 +133,7 @@ public class Main {
                     break;
             }
 
-            scanner.close();
+        //    scanner.close();
         }
     }
 

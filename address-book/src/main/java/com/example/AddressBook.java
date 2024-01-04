@@ -1,4 +1,4 @@
-package main.java.com.example;
+package com.example;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -90,13 +90,13 @@ public class AddressBook {
     }
 
     public List<Contact> searchByCity(String bookName, String city) {
-        return bookList.getOrDefault(bookName, List.of()).stream()
+        return bookList.getOrDefault(bookName,  Collections.emptyList()).stream()
                 .filter(contact -> contact.getCity().equalsIgnoreCase(city))
                 .collect(Collectors.toList());
     }
 
     public List<Contact> searchByState(String bookName, String state) {
-        return bookList.getOrDefault(bookName, List.of()).stream()
+        return bookList.getOrDefault(bookName,  Collections.emptyList()).stream()
                 .filter(contact -> contact.getState().equalsIgnoreCase(state))
                 .collect(Collectors.toList());
 
@@ -169,7 +169,7 @@ public class AddressBook {
         
         if (Files.exists(filePath)) {
             
-            String fileContent = Files.readString(filePath);
+            List<String> fileContent = Files.readAllLines(filePath);
             System.out.println("File Content:\n" + fileContent);
         } else {
             System.out.println("File does not exist: " + fileName);
